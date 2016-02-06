@@ -3,7 +3,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = Array.new(9, " ")
+    self.reset!
   end
 
   def reset!
@@ -23,26 +23,20 @@ class Board
   end
 
   def full?
-    result = @cells.detect{|pos| pos == " "}
-    result == " " ? false : true
+    @cells.all? {|cell| cell != " "}
   end
 
   def turn_count
-    result = @cells.select{|pos| pos == "X" || pos == "O"}
-    return result.count
+    @cells.count {|cell| cell == "O" || cell == "X"}
   end
 
   def taken?(pos)
-    if @cells[pos.to_i-1] == " "
-      return false
-    else
-      return true
-    end
+    @cells[pos.to_i-1] != " "
   end
 
   def valid_move?(pos)
     pos = pos.to_i
-    if pos >= 1 && pos <= 9 && !taken?(pos)
+    if pos.between?(1,9) && !taken?(pos)
       return true
     else
       return false

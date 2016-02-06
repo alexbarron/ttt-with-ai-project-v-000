@@ -1,7 +1,4 @@
 class TicTacToeCli
-  
-  def initialize
-  end
 
   def self.start
     puts "Welcome to Tic Tac Toe!"
